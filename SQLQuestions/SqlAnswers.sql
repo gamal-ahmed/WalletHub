@@ -154,3 +154,35 @@ CALL split_column(3);
 |    3 | White |
 |    3 | Snow  |
 +------+-------+
+
+
+
+
+--4- I have a table for bugs from a bug tracking software; let’s call the table “bugs”.
+--The table has four columns (id, open_date, close_date, severity). On any given day
+--a bug is open if the open_date is on or before that day and close_date is after
+--that day. For example, a bug is open on “2012-01-01”, if it’s created on or
+--before “2012-01-01” and closed on or after “2012-01-02”. I want a SQL to show
+--number of bugs open for a range of dates.
+
+
+SET @dateStart  = '2015-07-01';            
+SET @dateEnd    = '2015-08-02';
+
+SELECT open_date, count(1) as bugs_opened
+  FROM bugs
+ WHERE open_date >= @dateStart
+   AND open_date <= @dateEnd
+   AND close_date <= @dateEnd
+ GROUP BY open_date;
+ 
+ 
+-- Test
+ +------------+-------------+
+| open_date  | bugs_opened |
++------------+-------------+
+| 2015-07-30 |           1 |
+| 2015-07-31 |           1 |
+| 2015-08-01 |           1 |
++------------+-------------+
+
