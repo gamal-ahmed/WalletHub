@@ -1,4 +1,4 @@
-package largefile;
+package walletHup.largefile;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -3,8 +3,27 @@ package walletHup.k_complementary;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
+/**
+ * Write an efficient algorithm to find K-complementary pairs in a given array
+ * of integers. Given Array A, pair (i, j) is K- complementary if K = A[i] +
+ * A[j];
+ * 
+ * */
 public class K_complementary {
+	final static Logger logger = Logger.getLogger(K_complementary.class);
+
 	public static int findKComplLinearTimeLinearSpace(int[] arr, int K) {
+		if (arr.length < 2) {
+			throw new IllegalArgumentException(
+					"Array lentgh must be greater than 1");
+		}
+
+		if (logger.isInfoEnabled()) {
+			logger.info("Starting to find K_complementary with K  : " + K);
+		}
+
 		int count = 0;
 
 		// Let's store every item in a hashmap, key is the array element
@@ -30,7 +49,9 @@ public class K_complementary {
 				count += occurrencies.get(key) * occurrencies.get(needed);
 			}
 		}
-
+		if (logger.isInfoEnabled()) {
+			logger.info("number of  K_complementary for " + K + " is " + count);
+		}
 		return count;
 	}
 }
